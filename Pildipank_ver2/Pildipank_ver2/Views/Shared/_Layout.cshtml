@@ -1,0 +1,108 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>@ViewBag.Title - My ASP.NET Application</title>
+    @Styles.Render("~/Content/css")
+    @Scripts.Render("~/bundles/modernizr")
+    <style>
+        .generate-page-header {
+            text-align: center;
+            
+        }
+    </style>
+</head>
+<body>
+    <div class="navbar navbar-inverse navbar-fixed-top">
+        <div class="container">
+            <div class="navbar-header">
+                <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                </button>
+                @*@Html.ActionLink("Gallery", "Index", "Home", new { area = "" }, new { @class = "navbar-brand" })*@
+                <a href="@Url.Action("Index", "Home")">
+                   
+                    <img src="~/fonts/Logo3.png" alt="Logo" width="100"/>
+                </a>
+            </div>
+
+                <ul class="nav navbar-nav">
+
+                    @*<li>@Html.ActionLink("Home", "Index", "Home")</li>*@
+                    <li>@Html.ActionLink("ABOUT", "About", "Home")</li>
+                    @*<li>@Html.ActionLink("Contact", "Contact", "Home")</li>*@
+
+                    @if (@*(User.IsInRole("Kasutaja") &&*@ /**/
+                                                  /**/
+                                                  /**/
+                                                  Request.IsAuthenticated)
+                    {
+
+
+
+
+
+                        <li class="nav-item dropdown">
+                            <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="false" aria-expanded="true">
+                                PICTURES
+                            </a>
+                            <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+                                @*<a class="dropdown-item" href="~/Pictures/Index"> Pictures</a>*@
+                                @Html.ActionLink("Pictures", "Index", "Pictures", null, new { @class = "btn" })
+                                <div class="dropdown-divider"></div>
+                                @*<a class="dropdown-item" href="~/Pictures/IndexUser"> My Pictures</a>*@
+                                @Html.ActionLink("My Pictures", "IndexUser", "Pictures", null, new { @class = "btn" })
+                                <div class="dropdown-divider"></div>
+                                @*<a class="dropdown-item" href="~/Pictures/Create"> Add picture</a>*@
+                                @Html.ActionLink("Add Picture", "Create", "Pictures", null, new { @class = "btn" })
+
+                            </div>
+                        </li>
+                        @*<li> @Html.ActionLink("Pictures", "Index", "Pictures") </li>
+                <li> @Html.ActionLink("My Pictures", "IndexUser", "Pictures") </li>*@
+                        <li class="nav-item dropdown">
+                            <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                ALBUMS
+                            </a>
+                            <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+                                @*<a class="dropdown-item" href="~/Albums/Index"> Albumid</a>*@
+                                @Html.ActionLink("Albums", "Index", "Albums", null, new { @class = "btn" })
+                                <div class="dropdown-divider"></div>
+                                @*<a class="dropdown-item" href="~/Albums/IndexUser"> My Albums</a>*@
+                                @Html.ActionLink("My Albums", "IndexUser", "Albums", null, new { @class = "btn" })
+                            </div>
+                        </li>
+                        @*<li> @Html.ActionLink("Albums", "Index", "Albums") </li>
+                <li> @Html.ActionLink("My Albums", "IndexUser", "Albums") </li>*@
+                    }
+                    @if (User.IsInRole("Admin"))
+        {
+
+            <li>@Html.ActionLink("USERS", "Index", "AspNetUsers")</li>
+            <li>@Html.ActionLink("CATEGORIES", "Index", "Categories")</li>
+
+}
+
+                </ul>
+                @Html.Partial("_LoginPartial")
+            </div>
+        </div>
+    <div class="generate-page-header">
+        <img src="@Url.Action("Content", "Datafiles", new {Id=61})">
+    </div>
+    <div class="container body-content">
+        @RenderBody()
+        <hr />
+        <footer>
+            <p>&copy; @DateTime.Now.Year - ParemEsimene </p>
+        </footer>
+    </div>
+
+    @Scripts.Render("~/bundles/jquery")
+    @Scripts.Render("~/bundles/bootstrap")
+    @RenderSection("scripts", required: false)
+</body>
+</html>

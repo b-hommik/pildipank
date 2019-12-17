@@ -1,0 +1,69 @@
+﻿@using Pildipank_ver2.Models
+
+@{
+    ViewBag.Title = "Home Page";
+}
+<link href="~/Content/NewFont.css" rel="stylesheet" />
+
+<style>
+    .suurus {
+        object-fit: cover;
+        width: 350px;
+        height: 350px;
+    }
+</style>
+
+
+
+<h4  class="page-header" style="text-align:center;"><strong>Recently added pictures</strong></h4>
+<div class="photo row">
+    @foreach (Picture pilt in ViewBag.MostRecent)
+        {
+    <div class="col-lg-4 col-md-4 col-6">
+        <a href="@Url.Action("Details", "Pictures", new { id= pilt.Id })">
+            <img class="suurus img-thumbnail" src="@Url.Action("Content", "Datafiles", new { id= pilt.FileId })"  width="365">
+        </a>
+    </div>
+        }
+    </div>
+
+ <h4 class="page-header" style="text-align:center;"><strong>Most liked pictures</strong></h4>
+ <div class="photo row">
+     @foreach (Picture pilt in ViewBag.MostLiked)
+        {
+     <div class="col-lg-4 col-md-4 col-6">
+         <a href="@Url.Action("Details", "Pictures", new { id= pilt.Id })">
+             <img class="suurus img-thumbnail" src="@Url.Action("Content", "Datafiles", new { id= pilt.FileId })" width="365">
+         </a>
+     </div>
+         }
+     </div>
+ 
+  <h4 class="page-header" style="text-align:center;"><strong>Random pictures</strong></h4>
+  <div class="photo row">
+      @foreach (Picture pilt in ViewBag.RandomPics)
+        {
+      <div class="col-lg-4 col-md-4 col-6">
+          <a href="@Url.Action("Details", "Pictures", new { id= pilt.Id })">
+              <img class="suurus img-thumbnail" src="@Url.Action("Content", "Datafiles", new { id= pilt.FileId })" width="365">
+          </a>
+      </div>
+        }
+  </div>
+
+ <h4 class="page-header" style="text-align:center;"><strong>Most popular albums</strong></h4>
+ <div class="photo row">
+
+     @foreach (Album album in ViewBag.MostLikedAlbums)
+    {
+     <div class="col-lg-4 col-md-4 col-6">
+         <b> @Html.DisplayFor(Album => album.Name)</b>
+         <a href="@Url.Action("Details", "Albums", new { id = album.Id })">
+             <img class="suurus img-rounded" src="@Url.Action("Content", "Datafiles", new { id = (album.CoverPicture?.FileId) })" width="365" style="border: 10px ridge black">
+         </a>
+         </div>
+         }
+     </div>
+
+        
+

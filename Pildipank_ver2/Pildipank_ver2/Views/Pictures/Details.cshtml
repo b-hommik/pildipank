@@ -1,0 +1,129 @@
+﻿@model Pildipank_ver2.Models.Picture
+
+
+@{
+    ViewBag.Title = "Details";
+}
+
+<h2>@Html.DisplayFor(model => model.Name)</h2>
+
+<div>
+
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @*@Html.DisplayNameFor(model => model.Name)*@
+
+        </dt>
+
+
+        @*<dt>
+                @Html.DisplayNameFor(model => model.Created)
+            </dt>*@
+
+
+
+        @*<dt>
+                @Html.DisplayNameFor(model => model.Visibility)
+            </dt>
+
+            <dd>
+                @Html.DisplayFor(model => model.Visibility)
+            </dd>*@
+        @Html.HiddenFor(model => model.Visibility)
+
+        @*<dt>
+                @Html.DisplayNameFor(model => model.Album.UserId)
+            </dt>
+
+            <dd>
+                @Html.DisplayFor(model => model.Album.UserId)
+            </dd>*@
+
+        <dt>
+            @*@Html.DisplayNameFor(model => model.AspNetUser.FullName)*@
+            <span class="glyphicon glyphicon-user"></span>
+        </dt>
+
+        <dd>
+
+            @Html.DisplayFor(model => model.AspNetUser.FullName)
+        </dd>
+
+        @*<dt>
+                @Html.DisplayNameFor(model => model.DataFile.Name)
+            </dt>
+
+            <dd>
+                @Html.DisplayFor(model => model.DataFile.Name)
+            </dd>*@
+
+
+
+        <dd>  @Html.ActionLink("Set as cover picture", "SetCoverPicture", new { id = Model.Id }) </dd>
+
+        <dd>
+
+            <img style="width:100%" src="@Url.Action("Content", "Datafiles", new { id= Model.FileId })" />
+
+            <a href="@Url.Action("AddLike", "Pictures", new { id = Model.Id })">
+                <span class="glyphicon glyphicon-heart"></span> <span class="badge badge-success"> @Model.Likes.Count()</span>
+            </a>
+            <span class="glyphicon glyphicon-comment"></span> <span class="badge badge-success"> @Model.Comments.Count()</span>
+        <dt>
+            @*@Html.DisplayNameFor(model => model.Description)*@
+            <span class="glyphicon glyphicon-tag"></span>
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Description)
+            (@Html.DisplayFor(model => model.Created))
+        </dd>
+        <dt>
+            @*@Html.DisplayNameFor(model => model.Category.Name)*@
+            <span class="glyphicon glyphicon-bookmark"></span>
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Category.Name)
+
+        </dd>
+        <dd>
+            <form action="@Url.Action("AddComment")" method="post">
+                <input type="hidden" name="id" value="@Model.Id" />
+                <div class="form-group">
+                    <label for="comment">Comment:</label>
+                    <input type="text" class="form-control" id="comment" name="comment">
+                </div>
+                @*<a href="@Url.Action("AddComment","Pictures", new {id=Model.Id})">*@
+                <button type="submit" value="AddComment" class="btn btn-primary">Submit</button>
+
+            </form>
+            <p></p>
+            @foreach (var c in Model.Comments)
+            {
+                <p>@c.AspNetUser.FullName:  @c.Comment1  (@c.Created.ToShortDateString())</p>
+            }
+        </dd>
+
+
+    </dl>
+
+</div>
+@if (User.IsInRole("Admin") || Model.UserId == ViewBag.CurrentUser.Id)
+{
+    <p>
+        @Html.ActionLink("Edit", "Edit", new { id = Model.Id }, new { @class = "btn btn-default" })
+    </p>
+
+
+}
+<p>
+    @Html.ActionLink("Back to List", "Index", null, new { @class = "btn btn-default" })
+
+</p>
+
+@*<p>
+    @Html.ActionLink("Edit", "Edit", new { id = Model.Id }) |
+    @Html.ActionLink("Back to List", "Index")
+</p>*@

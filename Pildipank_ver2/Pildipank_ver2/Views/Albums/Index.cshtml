@@ -1,0 +1,171 @@
+﻿@model IEnumerable<Pildipank_ver2.Models.Album>
+@using Pildipank_ver2.Models
+
+@{
+    ViewBag.Title = "Index";
+}
+
+@*<h2>Index</h2>*@
+<style>
+    .suurus {
+        object-fit: cover;
+        width: 265px;
+        height: 265px;
+    }
+
+    .photo-column {
+        float: left;
+    }
+</style>
+
+<p>
+    <br />
+    <h4> @Html.ActionLink("Create New Album", "Create")</h4>
+</p>
+
+<form method="post" id="thisform">
+    @Html.DropDownList("AlbumId", (SelectList)ViewBag.AlbumId, "--select album--", htmlAttributes: new
+    {
+        @class = "form-inline",
+        onchange = "this.form.submit();"
+    })
+    <input type="text" name="searchString" placeholder="search..." value="@ViewBag.SearchString" class="form-inline" /> <button type="submit"><span class="glyphicon glyphicon-search"></span></button>
+
+
+
+    <br />
+
+    <input type="hidden" name="sortKey" id="sortKey" value="@ViewBag.SortKey" />
+    <input type="hidden" name="sortDirection" id="sortDirection" value="@ViewBag.SortDirection" />
+
+
+</form>
+<br />
+<form method="post" id="thisform">
+    @Html.ActionLink("Latest first", "Index", new { sortKey = "Created", sortDirection = "Desc" }, new { @class = "btn btn-default" })
+    @Html.ActionLink("Oldest first", "Index", new { sortKey = "Created", sortDirection = "Asc" }, new { @class = "btn btn-default" })
+    @Html.ActionLink("Most popular", "Index", new { sortKey = "MostLiked", sortDirection = "Desc" }, new { @class = "btn btn-default" })
+</form>
+<br />
+
+<div class="photo row">
+    @foreach (var item in Model)
+    {
+
+        if (item.Visibility == true)
+        {
+            <div class="col-lg-3 col-md-4 col-6">
+                <br />
+                <b> @Html.DisplayFor(modelItem => item.Name)</b>
+                <br />
+                <p> @Html.DisplayFor(modelItem => item.AspNetUser.FullName)</p>
+
+
+                <a href="@Url.Action("Details", "Albums", new { id = item.Id })">
+                    <img class="suurus img-fluid" src="@Url.Action("Content", "Datafiles", new { id = (item.CoverPicture?.FileId) })" />
+                </a>
+                <p>
+                    <span class="glyphicon glyphicon-picture"></span> <span class="badge badge-success"> @item.Pictures.Count() </span>
+                </p>
+
+
+                @*<a href="@Url.Action("AddLike", "Pictures", new { id = item.Id })">
+                        <span class="glyphicon glyphicon-heart"></span> <span class="badge badge-success"> @item.Likes.Count()</span>
+                    </a>
+
+                    <a href="@Url.Action("Details", "Pictures", new { id = item.Id })">
+                        <span class="glyphicon glyphicon-comment"></span> <span class="badge badge-success"> @item.Comments.Count()</span>
+                    </a>
+
+                    <span class="glyphicon glyphicon-calendar"></span> <span class="badge badge-success"> @item.Created.ToShortDateString()</span>
+                    <br />*@
+                <br />
+                <br />
+                <br />
+            </div>
+        }
+    }
+</div>
+
+
+
+
+
+
+@if (User.IsInRole("Admin"))
+{
+
+
+
+    <table class="table">
+        <tr>
+            @*<th>
+                    @Html.DisplayNameFor(model => model.OrderId)
+                </th>*@
+            <th>
+                @*@Html.DisplayNameFor(model => model.Name)*@
+                @Html.ActionLink("Album Name", "Index", new { sortKey = "Name", sortDirection = ((ViewBag.SortKey == "Name" && ViewBag.SortDirection == "Asc") ? "Desc" : "Asc") })
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Description)
+            </th>
+            @*<th>
+                    @Html.DisplayNameFor(model => model.Visibility)
+                </th>*@
+            <th>
+                @*@Html.DisplayNameFor(model => model.CoverPictureId)*@
+                Cover Picture
+
+            </th>
+            <th>
+                @*@Html.DisplayNameFor(model => model.AspNetUser.FullName)*@
+                @Html.ActionLink("Owner", "Index", new { sortKey = "FirstName", sortDirection = ((ViewBag.SortKey == "FirstName" && ViewBag.SortDirection == "Asc") ? "Desc" : "Asc") })
+            </th>
+
+        </tr>
+
+        @foreach (var item in Model)
+        {
+            <tr>
+                @if (item.Visibility == true)
+                {
+                    @*<td>
+                            @Html.DisplayFor(modelItem => item.OrderId)
+                        </td>*@
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Name)
+                        <br/>
+                        <span class="glyphicon glyphicon-picture"></span> <span class="badge badge-success"> @item.Pictures.Count() </span>
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Description)
+                    </td>
+                    @*<td>
+                            @Html.DisplayFor(modelItem => item.Visibility)
+                        </td>*@
+                    <td>
+                        @*@Html.DisplayFor(modelItem => item.CoverPictureId)*@
+                        <a href="@Url.Action("Details", "Albums", new { id = item.Id })">
+                            <img height="150" src="@Url.Action("Content", "Datafiles", new { id = (item.CoverPicture?.FileId) })" />
+                        </a>
+
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.AspNetUser.FullName)
+                    </td>
+
+
+
+                    if (User.IsInRole("Admin"))
+                    {
+                        <td>
+                            @Html.ActionLink("Edit", "Edit", new { id = item.Id }) |
+                            @Html.ActionLink("Details", "Details", new { id = item.Id }) |
+                            @Html.ActionLink("Delete", "Delete", new { id = item.Id }) |
+                        </td>}
+                }
+            </tr>
+        }
+
+    </table>
+}

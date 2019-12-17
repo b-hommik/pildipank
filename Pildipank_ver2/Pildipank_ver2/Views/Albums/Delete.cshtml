@@ -1,0 +1,78 @@
+﻿@model Pildipank_ver2.Models.Album
+
+@{
+    //ViewBag.Title = "Delete";
+}
+
+<h2>Delete album</h2>
+
+<h3 style="color:red;">Are you sure you want to delete this album? </h3>
+<h5>If you delete the album all the pictures in the album will be deleted as well.</h5>
+<div>
+
+    <hr />
+    <dl class="dl-horizontal">
+        @*<dt>
+                @Html.DisplayNameFor(model => model.OrderId)
+            </dt>*@
+        @Html.HiddenFor(model => model.OrderId)
+
+        @*<dd>
+                @Html.DisplayFor(model => model.OrderId)
+            </dd>*@
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Name)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Name)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Description)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Description)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Visibility)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Visibility)
+        </dd>
+
+        @*<dt>
+                @Html.DisplayNameFor(model => model.CoverPictureId)
+            </dt>
+
+            <dd>
+                @Html.DisplayFor(model => model.CoverPictureId)
+            </dd>*@
+
+        <dt>
+            @*@Html.DisplayNameFor(model => model.AspNetUser.Email)*@
+            User
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.AspNetUser.FullName)
+        </dd>
+
+    </dl>
+
+    @using (Html.BeginForm())
+    {
+        @Html.AntiForgeryToken()
+        <p>
+
+        <div class="form-actions no-color">
+            <input type="submit" value="Delete" class="btn btn-default" />
+            </p><p>
+                @Html.ActionLink("Back to List", "IndexUser", null, new { @class = "btn btn-default" })
+            </p>
+    }
+</div>

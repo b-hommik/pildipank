@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+ <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <!-- Diagram content (shape and connector positions) -->
+    <edmx:Diagrams>
+      <Diagram DiagramId="a8c7753e7b704c85aa8ee7882b4f0b07" Name="Diagram1">
+        <EntityTypeShape EntityType="ParemEsimeneModel.Album" Width="1.5" PointX="5.25" PointY="3.625" IsExpanded="true" />
+        <EntityTypeShape EntityType="ParemEsimeneModel.AspNetRole" Width="1.5" PointX="0.75" PointY="5.25" IsExpanded="true" />
+        <EntityTypeShape EntityType="ParemEsimeneModel.AspNetUserClaim" Width="1.5" PointX="0.625" PointY="7" IsExpanded="true" />
+        <EntityTypeShape EntityType="ParemEsimeneModel.AspNetUserLogin" Width="1.5" PointX="0.625" PointY="9.375" IsExpanded="true" />
+        <EntityTypeShape EntityType="ParemEsimeneModel.AspNetUser" Width="1.5" PointX="3" PointY="6.25" IsExpanded="true" />
+        <EntityTypeShape EntityType="ParemEsimeneModel.Category" Width="1.5" PointX="5.125" PointY="12.25" IsExpanded="true" />
+        <EntityTypeShape EntityType="ParemEsimeneModel.DataFile" Width="1.5" PointX="7.5" PointY="10.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="ParemEsimeneModel.Like" Width="1.5" PointX="7.5" PointY="8" IsExpanded="true" />
+        <EntityTypeShape EntityType="ParemEsimeneModel.Picture" Width="1.5" PointX="5.25" PointY="7.375" IsExpanded="true" />
+        <AssociationConnector Association="ParemEsimeneModel.FK__Album__UserId__656C112C" ManuallyRouted="false" />
+        <AssociationConnector Association="ParemEsimeneModel.FK__Picture__AlbumId__71D1E811" ManuallyRouted="false" />
+        <AssociationConnector Association="ParemEsimeneModel.FK_dbo_AspNetUserClaims_dbo_AspNetUsers_UserId" ManuallyRouted="false" />
+        <AssociationConnector Association="ParemEsimeneModel.FK_dbo_AspNetUserLogins_dbo_AspNetUsers_UserId" ManuallyRouted="false" />
+        <AssociationConnector Association="ParemEsimeneModel.FK__Category__UserId__619B8048" ManuallyRouted="false" />
+        <AssociationConnector Association="ParemEsimeneModel.FK__Likes__LikerId__6FE99F9F" ManuallyRouted="false" />
+        <AssociationConnector Association="ParemEsimeneModel.FK__Picture__UserId__693CA210" ManuallyRouted="false" />
+        <AssociationConnector Association="ParemEsimeneModel.FK__Picture__FileId__6A30C649" ManuallyRouted="false" />
+        <AssociationConnector Association="ParemEsimeneModel.FK__Likes__PictureId__6EF57B66" ManuallyRouted="false" />
+        <AssociationConnector Association="ParemEsimeneModel.AspNetUserRoles" ManuallyRouted="false" />
+        <AssociationConnector Association="ParemEsimeneModel.UserPicture" ManuallyRouted="false" />
+        <AssociationConnector Association="ParemEsimeneModel.FK__Picture__Categor__72C60C4A" />
+        <EntityTypeShape EntityType="ParemEsimeneModel.Comment" Width="1.5" PointX="10.5" PointY="8" />
+        <AssociationConnector Association="ParemEsimeneModel.FK__Comment__Comment__76969D2E" />
+        <AssociationConnector Association="ParemEsimeneModel.FK__Comment__Picture__75A278F5" />
+      </Diagram>
+    </edmx:Diagrams>
+  </edmx:Designer>
+</edmx:Edmx>

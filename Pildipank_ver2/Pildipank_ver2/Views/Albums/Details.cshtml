@@ -1,0 +1,104 @@
+﻿@using Pildipank_ver2.Models
+@model Pildipank_ver2.Models.Album
+
+
+@{
+    ViewBag.Title = "Details";
+}
+<style>
+    .suurus {
+        object-fit: cover;
+        width: 265px;
+        height: 265px;
+    }
+
+    .photo-column {
+        float: left;
+    }
+</style>
+
+<h2></h2>
+
+<div>
+    <h4>Album: @Html.DisplayFor(model => model.Name)</h4>
+    <hr />
+    <dl class="dl-horizontal">
+
+        <dt>
+            @*@Html.DisplayNameFor(model => model.AspNetUser.Email)*@
+            <span class="glyphicon glyphicon-user"></span>
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.AspNetUser.FullName)
+        </dd>
+
+        <dt>
+            @*@Html.DisplayNameFor(model => model.Description)*@
+            <span class="glyphicon glyphicon-tag"></span>
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Description)
+        </dd>
+        <dt>
+            <span class="glyphicon glyphicon-folder-open"></span>
+        </dt>
+        <dd>
+            <img src="@Url.Action("Content", "DataFiles", new { id = Model.CoverPicture?.FileId })" width="100" />
+        </dd>
+
+
+        @*<dt>
+            @Html.DisplayNameFor(model => model.Name)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Name)
+        </dd>*@
+
+
+        @*<dt>
+            @Html.DisplayNameFor(model => model.Visibility)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Visibility)
+        </dd>*@
+
+        @*<dt>
+            @Html.DisplayNameFor(model => model.CoverPictureId)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.CoverPictureId)
+        </dd>*@
+    </dl>
+
+        <br />
+        @if (User.IsInRole("Admin") || Model.UserId == ViewBag.CurrentUser.Id)
+    {
+        <p>
+            @Html.ActionLink("Edit", "Edit", new { id = Model.Id }, new { @class = "btn btn-default" })
+        </p>
+       
+
+}
+        <p>
+            @Html.ActionLink("Back to List", "Index",null, new { @class = "btn btn-default" })
+
+        </p>
+  
+    @foreach (Picture pilt in ViewBag.PicturesInAlbum)
+    {
+        <a href="@Url.Action("Details", "Pictures", new { id= pilt.Id })">
+            <img class="img-fluid img-thumbnail suurus" src="@Url.Action("Content", "Datafiles", new { id= pilt.FileId })" width="365">
+        </a>
+    }
+
+
+</div>
+
+
+
+
